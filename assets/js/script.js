@@ -13,11 +13,39 @@ function makeApiCall(countryCode){
         return reponse.json();
     })
     .then(function(data){
-        console.log(data);        
-        
+        console.log(data);   
+        covidNewsDisplay(countryCode,data);        
     })
 }
 
 makeApiCall(countryCode);
 
+//function to display news articles
+function covidNewsDisplay(code,info){
 
+    //display heading for the section
+    $(".news-display").append(
+        `
+        <div>
+        <h2>Latest News:</h2>
+        </div>
+        <div class="news-links"></div>
+        `
+    );
+    console.log(info.data.length)
+    //display news links
+    for(var i=0;i<info.data.length;i++){
+        
+        $(".news-links").append(
+            `
+            <div>
+            <p>
+            <a href=${info.data[i].url}>${info.data[i].title}</a>
+            </p>
+            </div>
+            `
+        )
+
+    }
+    
+}
