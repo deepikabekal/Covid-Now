@@ -15,8 +15,19 @@ function makeApiCall(countryCode){
     })
     .then(function(data){
         console.log("data",data);   
-        getInformation(data);
-        
+        getInformation(data);        
+    })
+    .catch(function(error){
+        console.log("error",error);
+        var errorMsg = "Sorry! There is no COVID-19 news related to this country."
+        var divTag = $("<div></div>");
+        divTag.attr("id", "error-div");
+        var headingEl = $("<h2></h2>").text("Latest News");
+        var errorPTag = $("<p></p>").text(errorMsg);
+        $(".news-display").append(divTag);
+        $(divTag).append(headingEl);
+        $(divTag).append(errorPTag);
+
     })
 }
 
