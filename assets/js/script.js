@@ -35,12 +35,14 @@ function covidNewsDisplay(code,info){
     console.log(info.data.length)
     //display news links
     for(var i=0;i<info.data.length;i++){
-        
+        var titleVal = info.data[i].title;
+        var finalTitle = titleVal.replace(/"/gi,"").trim();
+        console.log(finalTitle);
         $(".news-links").append(
             `
             <div>
             <p>
-            <a href=${info.data[i].url}>${info.data[i].title}</a>
+            <a href=${info.data[i].url}>${finalTitle}</a>
             </p>
             </div>
             `
