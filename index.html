@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="header">
+        <h1> Covid-Now</h1>
+        <p> enter any country name in the input box below to get Covid Data </p>
+    </div>
+
+<div class="input">
+    <h3 class="card header"> Search For Covid Data by Country</h3>
+    <form id="user-form" class="card-body">
+        <label class="form-label" for="countryname">Country Name</label>
+        <input name= "countryname" id="countryname" type="text" autofocus="true" class="form-input" />
+        <button type="submit" class="btn">Get Covid Data</button>
+        </form>
+    </div>
+   
+
+    <div class="covid-container">
+        <div class="card">
+        <h1 class="covid-title"> Covid Data </h1>
+        <p class="confirmed"></p>
+        <p class="recovered"></p>
+        <p class="deaths"></p>
+    </div>
+   
+<script src="assets/js/script.js"></script>
+</body>
+</html>
