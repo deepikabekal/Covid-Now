@@ -2,8 +2,6 @@
 
 var userFormE1 = document.querySelector("#user-form");
 var nameInputE1 = document.querySelector("#countryname");
-var dataContainerE1 = document.querySelector("#data-container")
-var countrySearchTerm = document.querySelector("#country-search-term")
 
 
 //button.addEventListener('click, Function()') {
@@ -26,28 +24,24 @@ var formSubmitHandler = function(event) {
 
 // APi call for covid Data 
 var getCovidData = function(country) {
-    var apiUrl = "https://covid-api.mmediagroup.fr/v1/cases?country=" + countryname + ""
+    var apiUrl = `https://covid-api.mmediagroup.fr/v1/cases?country=Canada` 
 
 //fetch request
 
-fetch(apiUrl)
-.then(function(response) {
-    response.json().then(function(data) {
-    displayCountrys(data, country);
-    });
-    });
+fetch(apiUrl) 
+.then(response => response.json())
+.then(data => { console.log(data);
 
-};
+ //       var confirmed = data[];
+ //       var recovered = data[];
+ //       var deaths = data[];
 
-var displayCountrys = function(country) {
-    console.log(country);
-   
+//  confirmed.innerHTML = 
+//  recovered.innerHTML = 
+//  deaths.innerHTML = 
+//  input.value ="";
 
-    //loop thru arrays to return information for country name 
-    // within country name = All -> confirmed / recovered / deaths 
-    //user input variable get link  for API 
-    
-
+ })
 };
 
 userFormE1.addEventListener("submit", formSubmitHandler);

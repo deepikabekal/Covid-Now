@@ -1,32 +1,35 @@
-var userFormE1 = document.querySelector("#user-form");
-var nameInputE1 = document.querySelector("#countryname");
+var button = document.querySelector("#search-btn");
+var inputValue = document.querySelector("#search-city");
+var confirmed = document.querySelector(".confirmed");
+var recovered = document.querySelector(".recovered");
+var deaths = document.querySelector(".deaths");
 
 
-var formSubmitHandler = function(event) {
-    event.preventDefault();
-    console.log(event);
+function countrySearch(event) {
+  event.preventDefault();
+  console.log("click");
+  var countryName = inputValue.value;
 
-var countryName = nameInputE1.value.trim();
+  fetch(`https://covid-api.mmediagroup.fr/v1/cases?country=${countryName}`)
+  .then(function(response) { 
+    response.json() 
+    .then(function(data) {
+      console.log(data);
 
-if (countryName) {
-    getCovidData =(countryName);
-    nameInputE1.value="";
-} else {
-    alert("please enter a valid Country Name");
-}
+    // get array for confirmed, recovered, deaths   
+    var allValue = data[`All`][`confirmed`]; 
+    var recValue = data[`All`][`recovered`];
+    var deathValue = data[`All`][`deaths`];
 
-};
 
-var getCovidData = function(country) {
-    var apiUrl = "https://api.covid19api.com/summary"
+    //print data
+    confirmed.innerHTML = allValue;
+    recovered.innerHTML = recValue;
+    deaths.innerHTML = deathValue;
+    inputValue = "";
 
-    //fetch request
-fetch(apiUrl).then(function(response){
-    response.json().then(function(data) {
-        console.log(data);
     });
-});
+  });
 };
-    
 
-userFormE1.addEventListener("submit", formSubmitHandler);
+button.addEventListener("click", countrySearch);

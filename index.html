@@ -13,20 +13,25 @@
         <p> enter any country name in the input box below to get Covid Data </p>
     </div>
 
-<div class="input">
-    <h3 class="card header"> Search For Covid Data by Country</h3>
-    <form id="user-form" class="card-body">
-        <label class="form-label" for="countryname">Country Name</label>
-        <input name= "countryname" id="countryname" type="text" autofocus="true" class="form-input" />
-        <button type="submit" class="btn">Get Covid Data</button>
-        </form>
-    </div>
+<div id = "left-container" class = col-md-3>
+ <form>
+        <label for="search-city" class="form-label">Search For a City</label>
+        <input type="text" id="search-city" class="form-control" placeholder="Search Country">
+        <button id="search-btn" class="btn btn-primary"type="submit"><i class="fas fa-search"></i></button>
+</form>
+    <div id="city-list">
+        <ul id="city-results" class="list-group"></ul>
+            <li>placeholder</li>
+        </ul>
    
 
     <div class="covid-container">
         <div class="card">
         <h1 class="covid-title"> Covid Data For: <span id="country-search-term"></span> </h1>
-        <div id="data-container" class="list-group"></div>
+        <p class="confirmed"></p>
+        <p class="recovered"></p>
+        <p class="deaths"></p>    
+
         </div>    
    
 <script src="assets/js/test.js"></script>
