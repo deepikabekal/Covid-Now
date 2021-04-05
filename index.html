@@ -13,13 +13,29 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
-    <header>
-        <i class="fas fa-globe"> COVID NOW</i>
-    </header>
-    
-    <footer>
-        <p>❤️Made by Group 4: Andrew Core, Deepika Bekal, Jessica Jeyanthiran, Jeremy Santos❤️</p>
-    </footer>
+    <div id="page-container">
+        <div id="content-wrap">
+            <header>
+                <i class="fas fa-globe"> COVID NOW</i>
+            </header>
+
+            <h1 class="page-title">WORLD'S COVID TRACKER</h1>
+
+            <div class="search-bar">
+                <input type="text" id="country-search" placeholder="Search By Country"/>
+                <button onclick="searchData(country)"class="btn btn-primary btn-sm">Search</button>
+            </div>
+            
+            <div class="row">
+                <div class="col-sm-6" id="covid-map"></div>
+                <div class="col-sm-6" id="news-related"></div>
+            </div>
+        </div>
+        <footer>
+            <p>&copy; COVID NOW </p>
+            <p class="names">Made by Group 4: Andrew Core, Deepika Bekal, Jessica Jeyanthiran, Jeremy Santos</p>
+        </footer>
+    </div>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
