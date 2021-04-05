@@ -2,14 +2,15 @@ var button = document.querySelector("#search-btn");
 var confirmed = document.querySelector(".confirmed");
 var recovered = document.querySelector(".recovered");
 var deaths = document.querySelector(".deaths");
-var counName = document.querySelector("#country-search-term")
-
+var counName = document.querySelector("#country-search-term");
+var countryCode = document.querySelector(".country-code");
 
 //Function to call API
 
 function countrySearch(event) {
   var inputValue = document.querySelector("#search-city");
   var countryName = inputValue.value;
+ // var countryCode = inputValue.value;
   event.preventDefault();
   console.log("click");
 
@@ -26,20 +27,21 @@ function countrySearch(event) {
       console.log(data);
 
       var counValue,allValue,recValue,deathValue
-      if(data.All){ //if the data.All property works, data contains a COUNTRY object.
+      if(data.All) { //if the data.All property works, data contains a COUNTRY object.
         counValue = countryName;  
         allValue = data[`All`][`confirmed`]; 
         recValue = data[`All`][`recovered`];
         deathValue = data[`All`][`deaths`];
       } else { //if there's no "All" property... we might have to dig in and find the right country.
         counValue = countryName;  
-        allValue = data[countryName][`confirmed`]; 
-        recValue = data[countryName][`recovered`];
-        deathValue = data[countryName][`deaths`];
+        allValue = data[`countryName`][`confirmed`]; 
+        recValue = data[`countryName`][`recovered`];
+        deathValue = data[`countryName`][`deaths`];
       }
 
 
     //print data
+    
     
     counName.innerHTML =  counValue;
     confirmed.innerHTML = allValue;
@@ -52,6 +54,7 @@ function countrySearch(event) {
     alert("Error: " + response.statusText);
   }
   }) 
+
 .catch(function(error) {
   alert("unable to connect to Covid Data");
 });
