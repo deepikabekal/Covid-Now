@@ -1,5 +1,4 @@
 var button = document.querySelector("#search-btn");
-var inputValue = document.querySelector("#search-city");
 var confirmed = document.querySelector(".confirmed");
 var recovered = document.querySelector(".recovered");
 var deaths = document.querySelector(".deaths");
@@ -9,9 +8,11 @@ var counName = document.querySelector("#country-search-term")
 //Function to call API
 
 function countrySearch(event) {
+  var inputValue = document.querySelector("#search-city");
+  var countryName = inputValue.value;
   event.preventDefault();
   console.log("click");
-  var countryName = inputValue.value;
+
 
 // Need to Add Error checking
 
@@ -24,11 +25,18 @@ function countrySearch(event) {
     .then(function(data) {
       console.log(data);
 
-    // get array Data for confirmed, recovered, deaths   
-    var counValue = countryName;  
-    var allValue = data[`All`][`confirmed`]; 
-    var recValue = data[`All`][`recovered`];
-    var deathValue = data[`All`][`deaths`];
+      var counValue,allValue,recValue,deathValue
+      if(data.All){ //if the data.All property works, data contains a COUNTRY object.
+        counValue = countryName;  
+        allValue = data[`All`][`confirmed`]; 
+        recValue = data[`All`][`recovered`];
+        deathValue = data[`All`][`deaths`];
+      } else { //if there's no "All" property... we might have to dig in and find the right country.
+        counValue = countryName;  
+        allValue = data[countryName][`confirmed`]; 
+        recValue = data[countryName][`recovered`];
+        deathValue = data[countryName][`deaths`];
+      }
 
 
     //print data
