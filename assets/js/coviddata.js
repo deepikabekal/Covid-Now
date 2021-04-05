@@ -19,11 +19,12 @@ function countrySearch(event) {
 
   fetch(`https://covid-api.mmediagroup.fr/v1/cases?country=${countryName}`)
   .then(function(response) { 
+    if (response.ok) {
     response.json() 
     .then(function(data) {
       console.log(data);
 
-    // get array for confirmed, recovered, deaths   
+    // get array Data for confirmed, recovered, deaths   
     var counValue = countryName;  
     var allValue = data[`All`][`confirmed`]; 
     var recValue = data[`All`][`recovered`];
@@ -32,14 +33,20 @@ function countrySearch(event) {
 
     //print data
     
-    counName.innerHTML =  counValue
+    counName.innerHTML =  counValue;
     confirmed.innerHTML = allValue;
     recovered.innerHTML = recValue;
     deaths.innerHTML = deathValue;
     inputValue = "";
 
     });
-  });
+  } else {
+    alert("Error: " + response.statusText);
+  }
+  }) 
+.catch(function(error) {
+  alert("unable to connect to Covid Data");
+});
 };
 
 

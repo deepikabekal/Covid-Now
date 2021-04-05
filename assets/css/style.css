@@ -1,0 +1,44 @@
+:root{
+
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+.header {
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+    background-color:darkgray;
+    color: oldlace;
+    padding: 5px;
+}
+
+body {
+display: flex;
+justify-content: center;
+flex-direction: column;
+
+}
+
+
+form {
+    display:flex;
+    justify-content:flex-start;
+    flex-direction: column;
+}
+
+#search-city {
+    width: 100%;
+}
+
+#search-btn i {
+    width: 50%;
+   
+    
+
+}
