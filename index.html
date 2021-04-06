@@ -21,13 +21,25 @@
 
             <h1 class="page-title">WORLD'S COVID TRACKER</h1>
 
-            <div class="search-bar">
-                <input type="text" id="country-search" placeholder="Search By Country"/>
-                <button onclick="searchData(country)"class="btn btn-primary btn-sm">Search</button>
-            </div>
+                <form class=search-bar>
+                    <input type="text" id="search-city" class="form-control" placeholder="Search Country">
+                    <button id="search-btn" class="btn btn-primary"type="submit"><i class="fas fa-search"></i></button>
+                </form>
             
             <div class="row">
-                <div class="col-sm-6" id="covid-map"></div>
+                <div class="col-sm-6" id="covid-map">
+                    <div class="covid-container">
+                        <div class="card">
+                            <h1 class="covid-title"> COVID Data For:<span id="country-search-term"></span></h1>
+                            <h3>Confirmed COVID-19 Cases</h3>
+                            <p class="confirmed"></p>
+                            <h3>Recovered COVID 19 Cases</h3>
+                            <p class="recovered"></p>
+                            <h3>COVID 19 Related Deaths</h3>
+                            <p class="deaths"></p>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-sm-6 news-display"></div>
             </div>
         </div>

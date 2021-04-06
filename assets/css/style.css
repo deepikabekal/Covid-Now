@@ -28,13 +28,7 @@ min-height: 100vh;
     padding: 10px;
 }
 
-#covid-map{
-    background-color: red;
-}
 
-#related-news {
-    background-color: green;
-}
 
 footer{
     position: absolute;
