@@ -1,10 +1,9 @@
-var countryName = "Canada"; //hard-coded country name 
-var countryCode = "ca"; //hard-coded country code
+// var countryName = "Canada"; //hard-coded country name 
+// var countryCode = "ca"; //hard-coded country code
 var apiKey = "cae4aa10ae68b4f113d12079116b3a90";
 var apiUrl = `http://api.mediastack.com/v1/news`;//mediastack API URL
 var newsAbout = "covid coronavirus";//keywords for the search
-var queryPara = `?keywords=${newsAbout}&countries=${countryCode}&languages=en&sort=published_asc`;//query to get covid relted news associted with country code in ascending order
-var newsInformation = [];
+
 // Covid Data Variables 
 var button = document.querySelector("#search-btn");
 var confirmed = document.querySelector(".confirmed");
@@ -21,6 +20,7 @@ function countrySearch(event) {
    // var countryCode = inputValue.value;
     event.preventDefault();
     console.log("click");
+    $(".news-display").empty();
   
   
   // Need to Add Error checking
@@ -48,7 +48,7 @@ function countrySearch(event) {
           deathValue = data[`countryName`][`deaths`];
           countryCode =data[`countryName`][`abbreviation`];
         }
-  
+        console.log(countryCode);
   
       //print data to <p> tags in div 
       
@@ -75,7 +75,7 @@ function countrySearch(event) {
 
 //function to make an API call to get the data 
 function makeApiCall(countryCode){
-
+    var queryPara = `?keywords=${newsAbout}&countries=${countryCode}&sort=published_asc`;//query to get covid relted news associted with country code in ascending order
     fetch(apiUrl+queryPara+`&access_key=${apiKey}`)
     .then(function(reponse){
         return reponse.json();
@@ -98,10 +98,10 @@ function makeApiCall(countryCode){
     })
 }
 
-makeApiCall(countryCode);
+// makeApiCall(countryCode);
 
 function getInformation(info){
-
+    var newsInformation = [];
     for (var i = 0; i < info.data.length; i++){
         var newsData = {
             newsTitle: info.data[i].title.trim(), 
