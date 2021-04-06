@@ -12,6 +12,13 @@ position: relative;
 min-height: 100vh;
 }
 
+.row {
+margin-left: 10px;
+display: flex;
+justify-content: center;
+
+}
+
 #content-wrap{
     padding-bottom: 2.5rem;
 }
@@ -26,6 +33,7 @@ min-height: 100vh;
     display: flex;
     justify-content: center;
     padding: 10px;
+    margin: 10px;
 }
 
 
