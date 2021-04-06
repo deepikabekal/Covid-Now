@@ -3,6 +3,7 @@
 var apiKey = "cae4aa10ae68b4f113d12079116b3a90";
 var apiUrl = `http://api.mediastack.com/v1/news`;//mediastack API URL
 var newsAbout = "covid coronavirus";//keywords for the search
+var searchHistory = [];
 
 // Covid Data Variables 
 var button = document.querySelector("#search-btn");
@@ -21,19 +22,30 @@ function countrySearch(event) {
     event.preventDefault();
     console.log("click");
     $(".news-display").empty();
+    covidApiCall(countryName);
   
-  
+}
   // Need to Add Error checking
   
   // API fetch with countryName as dynamic user generated variable 
-  
+function covidApiCall(countryName){
     fetch(`https://covid-api.mmediagroup.fr/v1/cases?country=${countryName}`)
     .then(function(response) { 
-      if (response.ok) {
-      response.json() 
-      .then(function(data) {
+        return response.json();
+    })
+    .then(function(data) {
         console.log(data);
+        console.log(countryName);
+        getCovidData(data,countryName);
+        
+    })    
   
+    // .catch(function(error) {
+    //     alert("unable to connect to Covid Data");
+    // })
+}
+function getCovidData(data,countryName){
+    
         var counValue,allValue,recValue,deathValue,countryCode
         if(data.All) { //if the data.All property works, data contains a COUNTRY object.
           counValue = countryName;  
@@ -41,12 +53,16 @@ function countrySearch(event) {
           recValue = data[`All`][`recovered`];
           deathValue = data[`All`][`deaths`];
           countryCode =data[`All`][`abbreviation`];
+          covidObject = {country:countryName, countryCodeV:countryCode, confirmedCase:allValue, recoveredCase:recValue, deathCase:deathValue};
+          
         } else { //if there's no "All" property... we might have to dig in and find the right country.
           counValue = countryName;  
           allValue = data[`countryName`][`confirmed`]; 
           recValue = data[`countryName`][`recovered`];
           deathValue = data[`countryName`][`deaths`];
           countryCode =data[`countryName`][`abbreviation`];
+          covidObject = {country:countryName, countryCodeV:countryCode, confirmedCase:allValue, recoveredCase:recValue, deathCase:deathValue};
+          
         }
         console.log(countryCode);
   
@@ -59,17 +75,9 @@ function countrySearch(event) {
       inputValue = "";
   
       makeApiCall(countryCode);
+      saveSearchHistory(countryName,covidObject);
   
-      });
-    } else {
-      alert("Error: " + response.statusText);
-    }
-    }) 
-  
-  .catch(function(error) {
-    alert("unable to connect to Covid Data");
-  });
-  };
+}
 
 // MediaStack Starts
 
@@ -154,3 +162,27 @@ function covidNewsDisplay(newsInformation){
 }
 
 button.addEventListener("click", countrySearch);
+
+function saveSearchHistory(countryName,covidObject){
+    searchHistory = JSON.parse(localStorage.getItem("covidNow")) || [];
+    console.log(searchHistory);
+
+    
+    if (searchHistory!==[]){
+        for (var i=0; i<searchHistory.length;i++){
+            if(countryName.toLowerCase()===searchHistory[i].country.toLowerCase()){
+                searchHistory.splice(i,1);
+            }
+        }
+    }
+
+    searchHistory.push(covidObject);
+    console.log("coid object", covidObject);
+    console.log("last search History", searchHistory);
+
+    localStorage.setItem("covidNow",JSON.stringify(searchHistory));
+
+    
+
+}
+
