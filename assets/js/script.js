@@ -182,7 +182,19 @@ function saveSearchHistory(countryName,covidObject){
 
     localStorage.setItem("covidNow",JSON.stringify(searchHistory));
 
-    
+    displaySearchHistory();
 
+}
+
+function displaySearchHistory(){
+    $("#search-history").empty();
+    var searchHistory = JSON.parse(localStorage.getItem("covidNow")) || [];
+    console.log(searchHistory.length);
+    for (var i=0; i<searchHistory.length; i++){
+        var optionTag = $("<option></option>");
+        optionTag.text(searchHistory[i].country);
+        console.log(optionTag);
+        $("#search-history").append(optionTag);
+    } 
 }
 
