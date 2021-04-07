@@ -118,7 +118,21 @@ function getInformation(info){
         newsInformation.push(newsData);
     }
     console.log("news information",newsInformation);
+    if (newsInformation.length===0){
+
+        var errorMsg = "Sorry! There is no COVID-19 news related to this country."
+        var divTag = $("<div></div>");
+        divTag.attr("id", "error-div");
+        //var headingEl = $("<h2></h2>").text("Latest News:");
+        var errorPTag = $("<p></p>").text(errorMsg);
+        $(".news-display").append(divTag);
+        $(divTag).append(headingEl);
+        $(divTag).append(errorPTag);
+
+    } else {
     covidNewsDisplay(newsInformation);
+    }
+    
 }
 
 
@@ -188,6 +202,7 @@ function saveSearchHistory(countryName,covidObject){
 
 function displaySearchHistory(){
     $("#search-history").empty();
+    $("#search-city").val("");
     var searchHistory = JSON.parse(localStorage.getItem("covidNow")) || [];
     console.log(searchHistory.length);
     for (var i=0; i<searchHistory.length; i++){
