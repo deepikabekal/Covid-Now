@@ -73,6 +73,16 @@ function getCovidData(data){
 
 }
 
+//function to format the numbers
+function numberFormat(covidDataArray){
+    for (var i=0; i<covidDataArray.length; i++){
+        covidDataArray[i] = covidDataArray[i].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    
+    }
+    console.log(covidDataArray);
+    return covidDataArray;
+}
+
 //function to display the extracted data on the page
 function displayCovidData(covidDataArray){
     $("#total-count").text(covidDataArray[0].toLocaleString());
