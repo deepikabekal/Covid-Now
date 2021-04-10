@@ -73,6 +73,18 @@ function getCovidData(data){
 
 }
 
+//function to display the extracted data on the page
+function displayCovidData(covidDataArray){
+    $("#total-count").text(covidDataArray[0].toLocaleString());
+    console.log(covidDataArray[0]);
+    $("#active-count").text(covidDataArray[1].toLocaleString());
+    $("#death-count").text(covidDataArray[2].toLocaleString());
+    $("#new-count").text(covidDataArray[3].toLocaleString());
+    $("#critical-count").text(covidDataArray[4].toLocaleString());
+    $("#new-death-count").text(covidDataArray[5].toLocaleString());
+
+}
+
 // MediaStack Starts
 
 //function to make an API call to get the data 
