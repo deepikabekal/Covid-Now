@@ -95,18 +95,23 @@ function displayCovidData(covidDataArray){
 
 }
 
-// MediaStack Starts
-
+//country-wise news api starts here
 //function to make an API call to get the data 
 function makeApiCall(countryCode){
-    var queryPara = `?keywords=${newsAbout}&countries=${countryCode}&sort=published_asc`;//query to get covid relted news associted with country code in ascending order
-    fetch(apiUrl+queryPara+`&access_key=${apiKey}`)
-    .then(function(reponse){
-        return reponse.json();
+    var queryPara = `q=${newsAbout}&country=${countryCode}&media=True`;
+    fetch(apiUrl+queryPara, {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": "72215e9887msh7621f36b90d5395p12171cjsn8f1cf12ac355",
+		"x-rapidapi-host": "covid-19-news.p.rapidapi.com"
+	}
     })
-    .then(function(data){
-        console.log("data",data);   
-        getInformation(data);        
+    .then(response => {
+        return response.json();
+    })
+    .then(data => {
+        console.log("data",data);
+        getInformation(data); 
     })
     .catch(function(error){
         console.log("error",error);
@@ -124,12 +129,13 @@ function makeApiCall(countryCode){
 
 // makeApiCall(countryCode);
 
+//get the news data and save in an array
 function getInformation(info){
     var newsInformation = [];
-    for (var i = 0; i < info.data.length; i++){
+    for (var i = 0; i < info.articles.length; i++){
         var newsData = {
-            newsTitle: info.data[i].title.trim(), 
-            newsUrl: info.data[i].url
+            newsTitle: info.articles[i].title.trim(), 
+            newsUrl: info.articles[i].link
         };
         newsInformation.push(newsData);
     }
@@ -150,6 +156,7 @@ function getInformation(info){
     }
     
 }
+
 
 
 
