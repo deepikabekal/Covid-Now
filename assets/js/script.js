@@ -21,81 +21,36 @@ $("nav").on("click", "button", function(){
     
 })
 
+// API fetch for the World and continent Covid data  
 
 
-// Covid Data Variables 
-var button = document.querySelector("#search-btn");
-var confirmed = document.querySelector(".confirmed");
-var recovered = document.querySelector(".recovered");
-var deaths = document.querySelector(".deaths");
-var counName = document.querySelector("#country-search-term");
-var countryCode = document.querySelector(".country-code");
-
-//Function to call API Covid Data 
-
-function countrySearch(event) {
-    var inputValue = document.querySelector("#search-city");
-    var countryName = inputValue.value;
-   // var countryCode = inputValue.value;
-    event.preventDefault();
-    console.log("click");
-    $(".news-display").empty();
-    covidApiCall(countryName);
-  
-}
-  // Need to Add Error checking
-  
-  // API fetch with countryName as dynamic user generated variable 
-function covidApiCall(countryName){
-    fetch(`http://covid-api.mmediagroup.fr/v1/cases?country=${countryName}`)
-    .then(function(response) { 
-        return response.json();
-    })
-    .then(function(data) {
-        console.log(data);
-        console.log(countryName);
-        getCovidData(data,countryName);
-        
-    })    
-  
-    // .catch(function(error) {
-    //     alert("unable to connect to Covid Data");
-    // })
-}
-function getCovidData(data,countryName){
-    
-        var counValue,allValue,recValue,deathValue,countryCode
-        if(data.All) { //if the data.All property works, data contains a COUNTRY object.
-          counValue = countryName;  
-          allValue = data[`All`][`confirmed`]; 
-          recValue = data[`All`][`recovered`];
-          deathValue = data[`All`][`deaths`];
-          countryCode =data[`All`][`abbreviation`];
-          covidObject = {country:countryName, countryCodeV:countryCode, confirmedCase:allValue, recoveredCase:recValue, deathCase:deathValue};
-          
-        } else { //if there's no "All" property... we might have to dig in and find the right country.
-          counValue = countryName;  
-          allValue = data[`countryName`][`confirmed`]; 
-          recValue = data[`countryName`][`recovered`];
-          deathValue = data[`countryName`][`deaths`];
-          countryCode =data[`countryName`][`abbreviation`];
-          covidObject = {country:countryName, countryCodeV:countryCode, confirmedCase:allValue, recoveredCase:recValue, deathCase:deathValue};
-          
+function covidApiCall(btnText){
+    if (btnText === "South America"){
+        btnText = "southamerica";        
+    } else if (btnText === "North America"){
+        btnText = "northamerica";
+    }
+    fetch("https://vaccovid-coronavirus-vaccine-and-treatment-tracker.p.rapidapi.com/api/npm-covid-data/"+btnText, 
+    {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-key": "72215e9887msh7621f36b90d5395p12171cjsn8f1cf12ac355",
+            "x-rapidapi-host": "vaccovid-coronavirus-vaccine-and-treatment-tracker.p.rapidapi.com"
         }
-        console.log(countryCode);
-  
-      //print data to <p> tags in div 
-      
-      counName.innerHTML =  counValue;
-      confirmed.innerHTML = allValue;
-      recovered.innerHTML = recValue;
-      deaths.innerHTML = deathValue;
-      inputValue = "";
-  
-      makeApiCall(countryCode);
-      saveSearchHistory(countryName,covidObject);
-  
+    })
+    .then(response => {
+	    return response.json();
+    })
+    .then(data => {
+        console.log("data = ", data);
+        getCovidData(data);
+    })
+    .catch(err => {
+	    console.error(err);
+     });
 }
+
+
 
 // MediaStack Starts
 
