@@ -50,7 +50,28 @@ function covidApiCall(btnText){
      });
 }
 
+//get the covid data for the respective continents and world
+function getCovidData(data){
+    var totalCases = 0;
+    var activeCases = 0;
+    var totalDeaths = 0;
+    var newCases = 0;
+    var criticalCases = 0;
+    var newDeaths = 0;
+    for (var i = 0; i < data.length || i===0; i++){
+        totalCases = totalCases + data[i].TotalCases;
+        activeCases = activeCases + data[i].ActiveCases;
+        totalDeaths = totalDeaths + data[i].TotalDeaths;
+        newCases = newCases + data[i].NewCases;
+        criticalCases = criticalCases + data[i].Serious_Critical;
+        newDeaths = newDeaths + data[i].NewDeaths;
+    }
+    var covidDataArray = [totalCases,activeCases,totalDeaths,newCases,criticalCases,newDeaths];
+    console.log("covid array", covidDataArray);
+    covidDataArray = numberFormat(covidDataArray);  
+    displayCovidData(covidDataArray);
 
+}
 
 // MediaStack Starts
 
