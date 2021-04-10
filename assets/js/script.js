@@ -1,9 +1,27 @@
 // var countryName = "Canada"; //hard-coded country name 
 // var countryCode = "ca"; //hard-coded country code
-var apiKey = "cae4aa10ae68b4f113d12079116b3a90";
-var apiUrl = `http://api.mediastack.com/v1/news`;//mediastack API URL
-var newsAbout = "covid coronavirus";//keywords for the search
+var newsAbout = "covid";//keywords for the search
+var apiUrl = `https://covid-19-news.p.rapidapi.com/v1/covid?`;//covid news API URL
 var searchHistory = [];
+
+
+//event listeners for button click
+
+$("nav").on("click", "button", function(){
+    var btnText = $(this).text();
+    if (btnText==="World"){
+        covidApiCall(btnText);
+        worldNewsApiCall();
+    } else {
+        covidApiCall(btnText);
+    }
+    
+    $("#nav-page-container").removeClass("hidden");
+    
+    
+})
+
+
 
 // Covid Data Variables 
 var button = document.querySelector("#search-btn");
@@ -29,7 +47,7 @@ function countrySearch(event) {
   
   // API fetch with countryName as dynamic user generated variable 
 function covidApiCall(countryName){
-    fetch(`https://covid-api.mmediagroup.fr/v1/cases?country=${countryName}`)
+    fetch(`http://covid-api.mmediagroup.fr/v1/cases?country=${countryName}`)
     .then(function(response) { 
         return response.json();
     })
