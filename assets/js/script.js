@@ -12,6 +12,7 @@ var recovered = document.querySelector(".recovered");
 var deaths = document.querySelector(".deaths");
 var counName = document.querySelector("#country-search-term");
 var countryCode = document.querySelector(".country-code");
+var formSearch = document.querySelector(".search-bar")
 
 //Function to call API Covid Data 
 
@@ -175,7 +176,7 @@ function covidNewsDisplay(newsInformation){
     
 }
 
-button.addEventListener("click", countrySearch);
+formSearch.addEventListener("submit", countrySearch);
 
 function saveSearchHistory(countryName,covidObject){
     searchHistory = JSON.parse(localStorage.getItem("covidNow")) || [];
