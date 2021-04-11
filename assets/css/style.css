@@ -2,7 +2,7 @@ header {
     background: #2980b9;
     font-size: 2rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between ;
     padding: 20px;
     color: white;
 }
@@ -12,6 +12,10 @@ header div {
     flex-wrap: wrap;
     justify-content: right;
     align-items: flex-end;
+}
+
+.form-control {
+    background-color: rgb(207, 207, 207);
 }
 
 #page-container{
