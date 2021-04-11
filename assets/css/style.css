@@ -55,8 +55,17 @@ justify-content: center;
 }
 
 .left-div {
-    padding: 5px;
+    padding: 10px;
     border: 1px solid rgba(128, 128, 128, 0.836);
+    border-radius: 20px;
+    font-family: 'Fraunces', serif;
+
+}
+
+.covid-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #content-wrap{
@@ -76,10 +85,9 @@ justify-content: center;
     justify-content: center;
     padding: 15px;
     margin: 10px;
-    
 }
 
-footer{
+footer {
     position: absolute;
     bottom: 0;
     width: 100%;
